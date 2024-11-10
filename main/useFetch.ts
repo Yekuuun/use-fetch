@@ -3,6 +3,8 @@
  * Github : https://github.com/yekuuun
  * 
  * This project was designed for avoiding young devs using libs likes axios & redaxios using native javascript fetch API => (lighter & faster)
+ * 
+ * CONTAINS : GET, POST, PUT, DELETE, POST with files
  */
 
 export interface IError {
@@ -75,6 +77,55 @@ export default class useFetch
         {
             const response:Response = await fetch(url, {
                 method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                credentials:'include',
+                body: JSON.stringify(body) //body => (data to be sendt)
+            })
+
+            if(!response.ok)
+            {
+                return this.buildErrorResponse(response);
+            }
+            else
+            {   
+                const data:T = await response.json() as T;
+
+                const apiResponse:IHttpResponse<T> = {
+                    "data":data,
+                    "error": null
+                }
+
+                return apiResponse;
+            }
+        }
+        catch(error)
+        {
+            const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+
+            const newExceptionResponse:IHttpResponse<T> = {
+                "data":null as unknown as T,
+                "error": {
+                    "message":errorMessage,
+                    "status":400
+                }
+            }
+
+            return newExceptionResponse;
+        }
+    }
+
+        /**
+     * Base POST request model.
+     * @param url 
+     * @param body 
+     */
+    static callPutRequest = async<T>(url:string, body:any):Promise<IHttpResponse<T>> => {
+        try
+        {
+            const response:Response = await fetch(url, {
+                method:'PUT',
                 headers:{
                     'Content-Type':'application/json'
                 },
