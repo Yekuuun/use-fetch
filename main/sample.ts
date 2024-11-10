@@ -27,6 +27,7 @@ const fetchData = async () => {
     try 
     {
         const apiResponse:IHttpResponse<IJsonPlaceholderPost> = await useFetch.callGetRequest('https://jsonplaceholder.typicode.com/todos/1');
+        console.log("------------GET REQUEST-----------")
         console.log(apiResponse);
 
         /**
@@ -58,6 +59,7 @@ const postRequest = async() => {
         }
 
         const apiResponse:IHttpResponse<IJsonPlaceholderPost> = await useFetch.callPostRequest("https://jsonplaceholder.typicode.com/posts", data);
+        console.log("------------POST REQUEST-----------")
         console.log(apiResponse);
 
         /**
@@ -97,6 +99,7 @@ const putRequest = async() => {
         }
 
         const apiResponse:IHttpResponse<IJsonPlaceholderPost> = await useFetch.callPutRequest("https://jsonplaceholder.typicode.com/posts/1", data);
+        console.log("------------PUT REQUEST-----------")
         console.log(apiResponse);
 
         /**
@@ -129,6 +132,7 @@ const deleteData = async () => {
     try 
     {
         const apiResponse:IHttpResponse<IJsonPlaceholderPost> = await useFetch.callGetRequest('https://jsonplaceholder.typicode.com/posts/1');
+        console.log("------------DEL REQUEST-----------")
         console.log(apiResponse);
 
         /**
@@ -147,7 +151,7 @@ const deleteData = async () => {
 };
 
 //-----------SAMPLES EXEC------------
-// fetchData();
-// postRequest();
-// putRequest();
-// deleteData();
+fetchData();
+postRequest();
+putRequest();
+deleteData();
