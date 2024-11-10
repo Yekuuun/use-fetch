@@ -12,6 +12,7 @@
 As I mentioned, useFetch is a small TypeScript class designed to demonstrate how to use fetch for basic HTTP API calls. As a developer, I often used pre-built tools like Axios or Redaxios to perform HTTP requests, but adding these dependencies is not always necessary. Adding libraries can increase your project’s size and introduce dependencies that may not be essential.
 
 In this guide, I'll show you how to create a basic class that implements GET, POST, PUT, and DELETE requests. We'll use generic T data types and a basic IHttpResponse interface for clean, centralized logic in your next web app.
+
 ---
 
 ### In details : 
