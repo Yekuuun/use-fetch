@@ -116,8 +116,8 @@ export default class useFetch
         }
     }
 
-        /**
-     * Base POST request model.
+    /**
+     * Base PUT request model.
      * @param url 
      * @param body 
      */
@@ -132,6 +132,54 @@ export default class useFetch
                 credentials:'include',
                 body: JSON.stringify(body) //body => (data to be sendt)
             })
+
+            if(!response.ok)
+            {
+                return this.buildErrorResponse(response);
+            }
+            else
+            {   
+                const data:T = await response.json() as T;
+
+                const apiResponse:IHttpResponse<T> = {
+                    "data":data,
+                    "error": null
+                }
+
+                return apiResponse;
+            }
+        }
+        catch(error)
+        {
+            const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+
+            const newExceptionResponse:IHttpResponse<T> = {
+                "data":null as unknown as T,
+                "error": {
+                    "message":errorMessage,
+                    "status":400
+                }
+            }
+
+            return newExceptionResponse;
+        }
+    }
+
+    /**
+     * base DELETE request model.
+     * @param url 
+     * @returns 
+     */
+    static callDeleteRequest = async<T> (url:string):Promise<IHttpResponse<T>> => {
+        try
+        {
+            const response:Response = await fetch(url, {
+                method:'DELETE',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                credentials: 'include'
+            });
 
             if(!response.ok)
             {
