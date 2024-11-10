@@ -131,7 +131,7 @@ const putRequest = async() => {
 const deleteData = async () => {
     try 
     {
-        const apiResponse:IHttpResponse<IJsonPlaceholderPost> = await useFetch.callGetRequest('https://jsonplaceholder.typicode.com/posts/1');
+        const apiResponse:IHttpResponse<IJsonPlaceholderPost> = await useFetch.callDeleteRequest('https://jsonplaceholder.typicode.com/posts/1');
         console.log("------------DEL REQUEST-----------")
         console.log(apiResponse);
 
